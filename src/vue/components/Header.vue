@@ -2,7 +2,7 @@
   <nav class="navbar navbar-light">
     <div class="container">
       <router-link class="navbar-brand" :to="{ name: 'home' }">
-        conduit
+        conduit2
       </router-link>
       <ul v-if="!is_authenticated" class="nav navbar-nav pull-xs-right">
         <li class="nav-item">
