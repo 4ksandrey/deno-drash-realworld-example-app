@@ -11,4 +11,4 @@ COPY . .
 # Указываем разрешения
 RUN deno cache src/app.ts
 
-CMD ["run", "--allow-net", "--allow-read", "--allow-env", "--allow-write", "server.ts"]
+CMD ["run", "--allow-net", "--allow-read", "--allow-env", "--allow-write", "src/app.ts"]
