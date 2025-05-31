@@ -57,6 +57,19 @@ export default class ValidationService {
     return true;
   }
 
+  static async isUsernameUnique(username: string): Promise<boolean> {
+    const user = await UserModel.where({ username: username });
+    if (user.length) {
+      return false;
+    }
+    return true;
+  }
+
+  static isUsernameValid(username: string): boolean {
+    const regex = /^(?!\d)[a-zA-Z0-9_-]{3,40}$/;
+    return regex.test(username);
+  }
+
   /**
    * @description
    * Validate that the two given passwords match.
