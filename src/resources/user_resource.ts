@@ -46,8 +46,8 @@ export default class UserResource extends BaseResource {
    *     - If all is successful, then we return a 200 response with the User
    *       object with its fields updated.
    */
-  public async POST() {
-    console.log("Handling UserResource POST.");
+  public async PUT() {
+    console.log("Handling UserResource PUT.");
 
     // Gather data
     const id = (this.request.getBodyParam("id") as string | number) || "";

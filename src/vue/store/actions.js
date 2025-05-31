@@ -131,19 +131,17 @@ export default {
     return new Promise((resolve) => {
       axios
         .delete(`/articles/comment/${commentId}`)
-        .then(
-          ((response) => {
-            let comments = [];
-            context.getters.comments.forEach((a, i) => {
-              if (a.id == commentId) {
-                return;
-              }
-              comments.push(a);
-            });
-            context.dispatch("setComments", comments);
-            resolve(response);
-          }),
-        )
+        .then((response) => {
+          let comments = [];
+          context.getters.comments.forEach((a, i) => {
+            if (a.id == commentId) {
+              return;
+            }
+            comments.push(a);
+          });
+          context.dispatch("setComments", comments);
+          resolve(response);
+        })
         .catch((err) => {
           resolve(err.response);
         });
@@ -409,7 +407,7 @@ export default {
         params.password = user.password;
       }
       axios
-        .post("/user", params)
+        .put("/user", params)
         .then((response) => {
           console.log("User updated successfuly.");
           context.dispatch("setUser", response.data.user);
@@ -441,7 +439,7 @@ function getCookie(cname) {
 
 function setCookie(cname, cvalue, exdays) {
   var d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
   var expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
