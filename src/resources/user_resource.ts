@@ -109,6 +109,7 @@ export default class UserResource extends BaseResource {
     user.username = username;
     user.bio = bio ?? "";
     user.image = image;
+    user.email = email;
     if (rawPassword) {
       user.password = await bcrypt.hash(rawPassword); // HASH THE PASSWORD
     }
