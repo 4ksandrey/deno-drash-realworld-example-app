@@ -37,6 +37,15 @@ class RegisterResource extends BaseResource {
     if (!username) {
       return this.errorResponse(422, "Username field required.");
     }
+    if (!ValidationService.isUsernameValid(username)) {
+      return this.errorResponse(
+        422,
+        "Username must be 3-40 characters, not start with a digit, and contain only letters, numbers, underscores or hyphens.",
+      );
+    }
+    if (!(await ValidationService.isUsernameUnique(username))) {
+      return this.errorResponse(422, "Username is already taken.");
+    }
     if (!email) {
       return this.errorResponse(422, "Email field required.");
     }
@@ -47,7 +56,7 @@ class RegisterResource extends BaseResource {
       return this.errorResponse(422, "Email must be a valid email.");
     }
     if (!(await ValidationService.isEmailUnique(email))) {
-      return this.errorResponse(422, "Email already taken.");
+      return this.errorResponse(422, "Email is already taken.");
     }
     if (!ValidationService.isPasswordStrong(rawPassword)) {
       return this.errorResponse(
