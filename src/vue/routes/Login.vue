@@ -29,6 +29,11 @@
                 placeholder="Password"
               />
             </fieldset>
+            <p class="text-xs-center">
+              <router-link :to="{ name: 'reset-password' }">
+                Forgot your password?
+              </router-link>
+            </p>
             <button class="btn btn-lg btn-primary pull-xs-right">
               Sign in
             </button>

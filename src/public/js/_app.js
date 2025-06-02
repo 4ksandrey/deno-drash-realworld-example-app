@@ -92,6 +92,11 @@ const router = new VueRouter({
       component: Register,
     },
     {
+      name: "reset-password",
+      path: "/reset-password",
+      component: ResetPassword,
+    },
+    {
       name: "settings",
       path: "/settings",
       component: Settings,
