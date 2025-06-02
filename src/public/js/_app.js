@@ -57,6 +57,7 @@ import ProfileFavorited from "@/routes/ProfileFavorited.vue";
 import Article from "@/routes/Article.vue";
 import ArticleEdit from "@/routes/ArticleEdit.vue";
 import NotFound from "@/routes/404.vue";
+import ResetPassword from "@/routes/ResetPassword.vue";
 
 const router = new VueRouter({
   routes: [
@@ -149,6 +150,7 @@ const router = new VueRouter({
 });
 
 // Ensure we checked auth before each page load.
+/*
 router.beforeEach(async (to, from, next) => {
   if (to.path !== "/login" && to.path !== "/register" && to.path !== "/") {
     const result = await store.dispatch("checkIfUserIsAuthenticated");
@@ -159,6 +161,17 @@ router.beforeEach(async (to, from, next) => {
   } else {
     next();
   }
+});
+*/
+router.beforeEach(async (to, from, next) => {
+  const publicPaths = ["/login", "/register", "/", "/reset-password"];
+  if (!publicPaths.includes(to.path)) {
+    const result = await store.dispatch("checkIfUserIsAuthenticated");
+    if (!result) {
+      return next("/login");
+    }
+  }
+  next();
 });
 
 //
